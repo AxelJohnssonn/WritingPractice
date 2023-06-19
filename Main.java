@@ -6,9 +6,7 @@ public class Main {
         Window w = new Window();
 
         
-        // WordHandler wh = new WordHandler(new FileHandler(new File("/Users/axeljohnsson/Documents/WritingPractice/ord.txt")));
-
-
+        //WordHandler wh = new WordHandler(new FileHandler(new File("/Users/axeljohnsson/Documents/WritingPractice/ord.txt")));
 
     }
 }

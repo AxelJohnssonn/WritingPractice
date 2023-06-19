@@ -33,9 +33,9 @@ public class WordHandler {
 
         for(String s : getTenWords()) {
             sb.append(s);
-            sb.append(" ");
+            sb.append("\u2423");
         }
-
+        sb.deleteCharAt(sb.length()-1);
         return sb.toString();
     }
 }
