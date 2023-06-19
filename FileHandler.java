@@ -7,15 +7,16 @@ import java.util.ArrayList;
 
 public class FileHandler {
     private ArrayList<String> list;
+    private File textFile;
 
-    public FileHandler() {
+    public FileHandler(File textFile) {
         list = new ArrayList<String>();
-
+        this.textFile = textFile;
     }
 
-    public boolean addWords(String filePath) {
+    public boolean addWords() {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(textFile))) {
             String line;
             while ((line = br.readLine()) != null) {
                 list.add(line);
@@ -26,5 +27,12 @@ public class FileHandler {
             return false;
         }
 
+    }
+
+    public ArrayList<String> getWords() {
+        if(list.isEmpty()) {
+            System.out.println("List of words is empty, Please select another textfile");
+        }
+        return list;
     }
 }
