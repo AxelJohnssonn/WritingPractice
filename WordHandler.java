@@ -30,10 +30,15 @@ public class WordHandler {
     
     public String getStringTenWords() {
         StringBuilder sb = new StringBuilder();
-
+        int currentSize = 0;
         for(String s : getTenWords()) {
-            sb.append(s);
-            sb.append("\u2423");
+            if(currentSize > 18 && currentSize < 33){
+                sb.append("\n");
+                currentSize = 0;
+            }
+                sb.append(s);
+                sb.append("\u2423");
+                currentSize = currentSize + s.length() + 1;
         }
         sb.deleteCharAt(sb.length()-1);
         return sb.toString();
