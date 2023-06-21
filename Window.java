@@ -1,7 +1,13 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.*;
 import javax.swing.text.*;
@@ -61,7 +67,7 @@ public class Window {
 
         AttributeSet whiteAttrs = styleContext.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground,
                 Color.WHITE);
-                
+
         AttributeSet greenAttrs = styleContext.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground,
                 Color.BLACK);
         AttributeSet redAttrs = styleContext.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground,
@@ -86,7 +92,7 @@ public class Window {
             public void keyTyped(KeyEvent e) {
                 char typedChar = e.getKeyChar();
                 StyledDocument doc = textPane.getStyledDocument();
-                
+
                 if (typedChar == '\b' || typedChar == '\n') {
                     e.consume();
                     return;
@@ -106,6 +112,16 @@ public class Window {
                     }
                     currentIndex++;
                     // textPane.setCaretPosition(currentIndex);
+                    try {
+                        File soundFile = new File("/Users/axeljohnsson/Documents/WritingPractice/KeyPressSample.wav");
+                        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+                        Clip clip = AudioSystem.getClip();
+                        clip.open(audioInputStream);
+                        clip.setFramePosition(400); // Rewind the sound to the beginning
+                        clip.start(); // Play the sound
+                    } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                        ex.printStackTrace();
+                    }
 
                 } else {
                     // Fel bokstav inmatad
